@@ -13,7 +13,9 @@ class ViewController: UIViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
             return UIStatusBarStyle.LightContent
        }
-    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
     
     @IBOutlet weak var eRaiseA: UIButton!
     @IBOutlet weak var xRaiseA: UIButton!
@@ -73,7 +75,7 @@ class ViewController: UIViewController {
                 Multiply.setTitle("×", forState: .Normal)
                 Divide.setTitle("÷", forState: .Normal)
                 Add.setTitle("+", forState: .Normal)
-                Subtract.setTitle("-", forState: .Normal)
+                Subtract.setTitle("−", forState: .Normal)
             default:
                 if backspace == true {
                     if displayScreen.text?.rangeOfString(".") != nil {
@@ -373,7 +375,7 @@ class ViewController: UIViewController {
             if operation == "+" {
                 result = firstNumber + secondNumber
                 resultFormatting()
-            }else if operation == "-" {
+            }else if operation == "−" {
                 result = firstNumber - secondNumber
                 resultFormatting()
             }else if operation == "×" {

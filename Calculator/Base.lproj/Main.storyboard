@@ -118,7 +118,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="148" id="AcQ-XO-gR5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="45"/>
                                 <state key="normal" title="=">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -134,7 +134,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-4J-f9Q">
                                 <rect key="frame" x="226" y="440" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="+">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -150,8 +150,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SSO-2u-Hqp">
                                 <rect key="frame" x="300" y="440" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
-                                <state key="normal" title="-">
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
+                                <state key="normal" title="−">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -217,7 +217,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tN-fc-bLJ">
                                 <rect key="frame" x="226" y="360" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="×">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -236,7 +236,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="3bB-Rm-hAz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="÷">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -252,7 +252,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIH-NH-cIq">
                                 <rect key="frame" x="300" y="280" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="π">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -268,7 +268,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGA-N1-vPb">
                                 <rect key="frame" x="226" y="280" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="√x">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -352,7 +352,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Pcu-q7-d6V"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="e">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -368,7 +368,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IvB-Sm-Ytf">
                                 <rect key="frame" x="151" y="200" width="75" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="x²">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -384,7 +384,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G65-jS-Icj">
                                 <rect key="frame" x="300" y="200" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal" title="% ">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -412,7 +412,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RQ-xT-U7d">
                                 <rect key="frame" x="226" y="200" width="74" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="28"/>
                                 <state key="normal">
                                     <string key="title">x!
 </string>
@@ -433,7 +433,7 @@
                             <constraint firstItem="W4t-yi-FYX" firstAttribute="leading" secondItem="HlD-tg-OBC" secondAttribute="trailing" id="1ss-4M-TT8"/>
                             <constraint firstItem="0Fe-aO-LI4" firstAttribute="trailing" secondItem="8AN-Tp-bon" secondAttribute="trailing" id="67b-ue-RYp"/>
                             <constraint firstItem="ucH-4J-f9Q" firstAttribute="leading" secondItem="6tN-fc-bLJ" secondAttribute="leading" id="6Sz-I6-kX9"/>
-                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="baseline" secondItem="0Fe-aO-LI4" secondAttribute="baseline" id="6Vu-pv-87R"/>
+                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="baseline" secondItem="0Fe-aO-LI4" secondAttribute="baseline" constant="2" id="6Vu-pv-87R"/>
                             <constraint firstItem="02N-Up-hBO" firstAttribute="baseline" secondItem="Nd4-eX-iRd" secondAttribute="firstBaseline" id="6vK-ya-GB2"/>
                             <constraint firstItem="49u-3S-xc8" firstAttribute="trailing" secondItem="ZIH-NH-cIq" secondAttribute="trailing" id="7Vi-7w-IkO"/>
                             <constraint firstItem="0Fe-aO-LI4" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="7ak-xI-42w"/>
@@ -473,7 +473,7 @@
                             <constraint firstItem="Mp1-Rc-CUJ" firstAttribute="top" secondItem="2RQ-xT-U7d" secondAttribute="top" id="VtJ-XN-Ozv"/>
                             <constraint firstItem="doT-K2-VPi" firstAttribute="baseline" secondItem="02N-Up-hBO" secondAttribute="firstBaseline" id="X82-i5-3jV"/>
                             <constraint firstItem="02N-Up-hBO" firstAttribute="leading" secondItem="IvB-Sm-Ytf" secondAttribute="leading" id="XPI-X3-qh4"/>
-                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="firstBaseline" secondItem="3cn-9J-izR" secondAttribute="baseline" id="Xop-LG-g9C"/>
+                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="firstBaseline" secondItem="3cn-9J-izR" secondAttribute="baseline" constant="2" id="Xop-LG-g9C"/>
                             <constraint firstItem="jc4-P5-qKh" firstAttribute="top" secondItem="pJo-HL-ljV" secondAttribute="top" id="Xr2-ss-NGM"/>
                             <constraint firstItem="Mp1-Rc-CUJ" firstAttribute="bottom" secondItem="G65-jS-Icj" secondAttribute="bottom" id="ZYl-WQ-BeB"/>
                             <constraint firstItem="49u-3S-xc8" firstAttribute="trailing" secondItem="G65-jS-Icj" secondAttribute="trailing" id="aKm-D4-aML"/>
@@ -482,7 +482,7 @@
                             <constraint firstItem="HlD-tg-OBC" firstAttribute="top" secondItem="pJo-HL-ljV" secondAttribute="bottom" id="akw-Et-4Vl"/>
                             <constraint firstItem="jc4-P5-qKh" firstAttribute="top" secondItem="49u-3S-xc8" secondAttribute="top" id="bI5-vD-dBS"/>
                             <constraint firstItem="49u-3S-xc8" firstAttribute="leading" secondItem="6tN-fc-bLJ" secondAttribute="trailing" id="bda-Ur-buz"/>
-                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="baseline" secondItem="3cn-9J-izR" secondAttribute="firstBaseline" id="caT-HN-wGb"/>
+                            <constraint firstItem="A9H-fJ-sSQ" firstAttribute="baseline" secondItem="3cn-9J-izR" secondAttribute="firstBaseline" constant="2" id="caT-HN-wGb"/>
                             <constraint firstItem="A9H-fJ-sSQ" firstAttribute="trailing" secondItem="6tN-fc-bLJ" secondAttribute="trailing" constant="74" id="eFv-Az-wkt"/>
                             <constraint firstItem="0Fe-aO-LI4" firstAttribute="leading" secondItem="kla-EC-Bsh" secondAttribute="leading" id="ejk-aE-9nf"/>
                             <constraint firstItem="U4P-AL-7nK" firstAttribute="baseline" secondItem="W4t-yi-FYX" secondAttribute="firstBaseline" id="fXD-h4-VeJ"/>
@@ -529,6 +529,7 @@
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="Add" destination="ucH-4J-f9Q" id="tP4-Zf-7oj"/>
                         <outlet property="Divide" destination="49u-3S-xc8" id="hWs-yo-RcI"/>
