@@ -25,10 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var Divide: UIButton!
     @IBOutlet weak var Add: UIButton!
     @IBOutlet weak var Subtract: UIButton!
-    @IBOutlet weak var backSpace: UIButton!
     @IBOutlet weak var displayScreen: UILabel!
     
-    var labelChanged = false
+    var backspace = false
     var NoDecimalYet = true
     var disableEquals = true
     var userTyping = false
@@ -39,7 +38,94 @@ class ViewController: UIViewController {
     var digitsTapped = 0
     
     override func viewDidLoad() {
-        backSpace.enabled = false
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: "respond:")
+        swipeUp.direction = .Up
+        view.addGestureRecognizer(swipeUp)
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: "respond:")
+        swipeDown.direction = .Down
+        view.addGestureRecognizer(swipeDown)
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "respond:")
+        swipeRight.direction = .Right
+        view.addGestureRecognizer(swipeRight)
+    }
+    
+    func respond(gesture: UIGestureRecognizer){
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Up:
+                eRaiseA.setTitle("eª", forState: .Normal)
+                xRaiseA.setTitle("xª", forState: .Normal)
+                xFact.setTitle("log", forState: .Normal)
+                twoRootX.setTitle("ln", forState: .Normal)
+                Percentage.setTitle("1/x", forState: .Normal)
+                Pi.setTitle("ʸ√x", forState: .Normal)
+                Multiply.setTitle("Sin", forState: .Normal)
+                Divide.setTitle("Cos", forState: .Normal)
+                Add.setTitle("Tan", forState: .Normal)
+                Subtract.setTitle("Rand", forState: .Normal)
+            case UISwipeGestureRecognizerDirection.Down:
+                eRaiseA.setTitle("e", forState: .Normal)
+                xRaiseA.setTitle("x²", forState: .Normal)
+                xFact.setTitle("x!", forState: .Normal)
+                twoRootX.setTitle("√x", forState: .Normal)
+                Percentage.setTitle("%", forState: .Normal)
+                Pi.setTitle("π", forState: .Normal)
+                Multiply.setTitle("×", forState: .Normal)
+                Divide.setTitle("÷", forState: .Normal)
+                Add.setTitle("+", forState: .Normal)
+                Subtract.setTitle("-", forState: .Normal)
+            default:
+                if backspace == true {
+                    if displayScreen.text?.rangeOfString(".") != nil {
+                        NoDecimalYet = false
+                    }else{
+                        NoDecimalYet = true
+                    }
+                    var truncated = String(displayScreen.text!.characters.dropLast())
+                    let length = truncated.characters.count
+                    let char = "," as Character
+                    
+                    if NoDecimalYet == true {
+                        if length == 0 {
+                            truncated = "0"
+                        }else if length == 4 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
+                        }else if length == 5 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
+                        }else if length == 6 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
+                        }else if length == 8 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(4))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(3))
+                        }else if length == 9 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
+                        }else if length == 9 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
+                        }else if length == 10 {
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
+                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(6))
+                            truncated.removeAtIndex(truncated.startIndex.advancedBy(8))
+                        }
+                    }
+                    displayScreen.text = truncated
+                    if truncated == "0" {
+                        userTyping = false
+                    }else{
+                        userTyping = true
+                    }
+                }
+            }
+        }
     }
     
     func formatLabel(var string: String) -> String {
@@ -143,36 +229,6 @@ class ViewController: UIViewController {
         return string
     }
     
-    
-    
-    @IBAction func moreOperations(sender: UIBarButtonItem) {
-        if labelChanged == false {
-            eRaiseA.setTitle("eª", forState: .Normal)
-            xRaiseA.setTitle("xª", forState: .Normal)
-            xFact.setTitle("log", forState: .Normal)
-            twoRootX.setTitle("ln", forState: .Normal)
-            Percentage.setTitle("1/x", forState: .Normal)
-            Pi.setTitle("ʸ√x", forState: .Normal)
-            Multiply.setTitle("Sin", forState: .Normal)
-            Divide.setTitle("Cos", forState: .Normal)
-            Add.setTitle("Tan", forState: .Normal)
-            Subtract.setTitle("Rand", forState: .Normal)
-            labelChanged = true
-        } else {
-            eRaiseA.setTitle("e", forState: .Normal)
-            xRaiseA.setTitle("x²", forState: .Normal)
-            xFact.setTitle("x!", forState: .Normal)
-            twoRootX.setTitle("√x", forState: .Normal)
-            Percentage.setTitle("%", forState: .Normal)
-            Pi.setTitle("π", forState: .Normal)
-            Multiply.setTitle("×", forState: .Normal)
-            Divide.setTitle("÷", forState: .Normal)
-            Add.setTitle("+", forState: .Normal)
-            Subtract.setTitle("-", forState: .Normal)
-            labelChanged = false
-        }
-    }
-    
     @IBAction func digitTapped(sender: UIButton) {
         if digitsTapped <= 8 {
         let digit = sender.currentTitle
@@ -186,7 +242,6 @@ class ViewController: UIViewController {
         } else {
             if digit == "0" {
                displayScreen.text = "0"
-//                userTyping = false
             } else {
                 displayScreen.text = digit
                 userTyping = true
@@ -197,7 +252,7 @@ class ViewController: UIViewController {
             digitsTapped = number.characters.count
         }
         disableEquals = false
-        backSpace.enabled = true
+        backspace = true
     }
     
     
@@ -214,7 +269,7 @@ class ViewController: UIViewController {
             userTyping = true
         }
         NoDecimalYet = false
-        backSpace.enabled = true
+        backspace = true
     }
     
     @IBAction func Operation(sender: UIButton) {
@@ -226,11 +281,9 @@ class ViewController: UIViewController {
         if operation == "e" {
             result = 2.71828
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "eª" {
             result = pow(2.71828, firstNumber)
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "ln" {
             if firstNumber > 0 {
                 result = log(firstNumber)
@@ -238,7 +291,6 @@ class ViewController: UIViewController {
             }else{
                 displayScreen.text = "Error"
             }
-            backSpace.enabled = false
         }else if operation == "1/x" {
             if firstNumber == 0 {
                 displayScreen.text = "Error"
@@ -246,15 +298,12 @@ class ViewController: UIViewController {
                 result = 1/firstNumber
                 resultFormatting()
             }
-            backSpace.enabled = false
         }else if operation == "x²" {
             result = firstNumber * firstNumber
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "π" {
             result = 3.14159
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "√x" {
             if firstNumber >= 0 {
             result = sqrt(firstNumber)
@@ -262,29 +311,25 @@ class ViewController: UIViewController {
             }else{
                 displayScreen.text = "Error"
             }
-            backSpace.enabled = false
         }else if operation == "Rand" {
             result = drand48()
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "Sin" {
             result = sin((firstNumber*3.14159)/180)
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "Cos" {
             result = cos((firstNumber*3.14159)/180)
             resultFormatting()
-            backSpace.enabled = false
         }else if operation == "Tan" {
             result = tan((firstNumber*3.14159)/180)
             resultFormatting()
-            backSpace.enabled = false
         }
         }
         userTyping = false
         disableEquals = true
         digitsTapped = 0
         NoDecimalYet = true
+        backspace = false
     }
   
     @IBAction func xFactNLog(sender: UIButton) {
@@ -311,7 +356,7 @@ class ViewController: UIViewController {
         }
         userTyping = false
         disableEquals = true
-        backSpace.enabled = false
+        backspace = false
     }
     
     @IBAction func equals(sender: UIButton) {
@@ -323,7 +368,6 @@ class ViewController: UIViewController {
             } else {
                 displayScreen.text = displayScreen.text!
             }
-            backSpace.enabled = true
         } else {
             Numbersecond()
             if operation == "+" {
@@ -352,12 +396,11 @@ class ViewController: UIViewController {
                 result = (firstNumber / 100) * secondNumber
                 resultFormatting()
             }
-            backSpace.enabled = false
             }
         }
         userTyping = false
         disableEquals = true
-        
+        backspace = false
     }
 
      @IBAction func clear(sender: UIButton) {
@@ -369,59 +412,6 @@ class ViewController: UIViewController {
         NoDecimalYet = true
     }
     
-    @IBAction func backSpace(sender: UIButton) {
-         if displayScreen.text?.rangeOfString(".") != nil {
-            NoDecimalYet = false
-         } else {
-            NoDecimalYet = true
-        }
-        var truncated = String(displayScreen.text!.characters.dropLast())
-        let length = truncated.characters.count
-        let char = "," as Character
-       
-        if NoDecimalYet == true {
-            if length == 0 {
-                truncated = "0"
-            }else if length == 4 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
-            } else if length == 5 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
-            } else if length == 6 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-            } else if length == 8 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(4))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(3))
-            } else if length == 9 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
-            } else if length == 9 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
-            } else if length == 10 {
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-                truncated.insert(char, atIndex: truncated.startIndex.advancedBy(6))
-                truncated.removeAtIndex(truncated.startIndex.advancedBy(8))
-            }
-        }
-        displayScreen.text = truncated
-        if truncated == "0" {
-            userTyping = false
-        }else{
-            userTyping = true
-        }
-    }
-    
-    func Error() {
-                    }
-    
     func factorial(n: Double) -> Double {
         if n >= 0 {
             return n == 0 ? 1 : n * self.factorial(n - 1)
@@ -430,7 +420,6 @@ class ViewController: UIViewController {
             return 0 / 0
         }
     }
-    
 }
 
 
