@@ -143,6 +143,8 @@ class ViewController: UIViewController {
         return string
     }
     
+    
+    
     @IBAction func moreOperations(sender: UIBarButtonItem) {
         if labelChanged == false {
             eRaiseA.setTitle("eª", forState: .Normal)
@@ -183,8 +185,8 @@ class ViewController: UIViewController {
             userTyping = true
         } else {
             if digit == "0" {
-                displayScreen.text = displayScreen.text!
-                userTyping = false
+               displayScreen.text = "0"
+//                userTyping = false
             } else {
                 displayScreen.text = digit
                 userTyping = true
@@ -197,6 +199,7 @@ class ViewController: UIViewController {
         disableEquals = false
         backSpace.enabled = true
     }
+    
     
     
    
@@ -215,7 +218,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func Operation(sender: UIButton) {
-        Numberfirst()
+        if displayScreen.text == "Error" {
+            displayScreen.text = "0"
+        }else{
+            Numberfirst()
         operation = sender.currentTitle!
         if operation == "e" {
             result = 2.71828
@@ -226,12 +232,20 @@ class ViewController: UIViewController {
             resultFormatting()
             backSpace.enabled = false
         }else if operation == "ln" {
-            result = log(firstNumber)
-            resultFormatting()
+            if firstNumber > 0 {
+                result = log(firstNumber)
+                resultFormatting()
+            }else{
+                displayScreen.text = "Error"
+            }
             backSpace.enabled = false
         }else if operation == "1/x" {
-            result = 1/firstNumber
-            resultFormatting()
+            if firstNumber == 0 {
+                displayScreen.text = "Error"
+            }else{
+                result = 1/firstNumber
+                resultFormatting()
+            }
             backSpace.enabled = false
         }else if operation == "x²" {
             result = firstNumber * firstNumber
@@ -242,8 +256,12 @@ class ViewController: UIViewController {
             resultFormatting()
             backSpace.enabled = false
         }else if operation == "√x" {
+            if firstNumber >= 0 {
             result = sqrt(firstNumber)
             resultFormatting()
+            }else{
+                displayScreen.text = "Error"
+            }
             backSpace.enabled = false
         }else if operation == "Rand" {
             result = drand48()
@@ -262,6 +280,7 @@ class ViewController: UIViewController {
             resultFormatting()
             backSpace.enabled = false
         }
+        }
         userTyping = false
         disableEquals = true
         digitsTapped = 0
@@ -269,14 +288,27 @@ class ViewController: UIViewController {
     }
   
     @IBAction func xFactNLog(sender: UIButton) {
+        if displayScreen.text != "Error" {
         Numberfirst()
         operation = sender.currentTitle!
         if operation == "log" {
+            if firstNumber > 0 {
             result = log10(firstNumber)
+            resultFormatting()
+            }else{
+                displayScreen.text = "Error"
+            }
         }else {
-            result = factorial(firstNumber)
+            if firstNumber < 1 {
+                displayScreen.text = "Error"
+            } else {
+                result = factorial(firstNumber)
+                resultFormatting()
+            }
+            }
+        }else{
+            displayScreen.text = "0"
         }
-        resultFormatting()
         userTyping = false
         disableEquals = true
         backSpace.enabled = false
@@ -296,20 +328,30 @@ class ViewController: UIViewController {
             Numbersecond()
             if operation == "+" {
                 result = firstNumber + secondNumber
+                resultFormatting()
             }else if operation == "-" {
                 result = firstNumber - secondNumber
+                resultFormatting()
             }else if operation == "×" {
                 result = firstNumber * secondNumber
+                resultFormatting()
             }else if operation == "÷" {
                 result = firstNumber / secondNumber
+                resultFormatting()
             }else if operation == "xª" {
                 result = pow(firstNumber, secondNumber)
+                resultFormatting()
             }else if operation == "ʸ√x" {
-                result = pow(firstNumber, (1/secondNumber))
+                if secondNumber <= 0 || firstNumber < 0 {
+                    displayScreen.text = "Error"
+                }else{
+                    result = pow(firstNumber, (1/secondNumber))
+                    resultFormatting()
+                }
             }else if operation == "% " {
                 result = (firstNumber / 100) * secondNumber
+                resultFormatting()
             }
-            resultFormatting()
             backSpace.enabled = false
             }
         }
@@ -376,6 +418,9 @@ class ViewController: UIViewController {
             userTyping = true
         }
     }
+    
+    func Error() {
+                    }
     
     func factorial(n: Double) -> Double {
         if n >= 0 {
