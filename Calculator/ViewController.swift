@@ -336,22 +336,26 @@ class ViewController: UIViewController {
   
     @IBAction func xFactNLog(sender: UIButton) {
         if displayScreen.text != "Error" {
-        Numberfirst()
-        operation = sender.currentTitle!
-        if operation == "log" {
-            if firstNumber > 0 {
-            result = log10(firstNumber)
-            resultFormatting()
+            if NoDecimalYet == true {
+                Numberfirst()
+                operation = sender.currentTitle!
+                if operation == "log" {
+                    if firstNumber > 0 {
+                        result = log10(firstNumber)
+                        resultFormatting()
+                    }else{
+                        displayScreen.text = "Error"
+                    }
+                }else {
+                    if firstNumber < 1 {
+                        displayScreen.text = "Error"
+                    }else {
+                        result = factorial(firstNumber)
+                        resultFormatting()
+                    }
+                }
             }else{
                 displayScreen.text = "Error"
-            }
-        }else {
-            if firstNumber < 1 {
-                displayScreen.text = "Error"
-            } else {
-                result = factorial(firstNumber)
-                resultFormatting()
-            }
             }
         }else{
             displayScreen.text = "0"
