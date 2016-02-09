@@ -336,7 +336,6 @@ class ViewController: UIViewController {
   
     @IBAction func xFactNLog(sender: UIButton) {
         if displayScreen.text != "Error" {
-            if NoDecimalYet == true {
                 Numberfirst()
                 operation = sender.currentTitle!
                 if operation == "log" {
@@ -347,16 +346,18 @@ class ViewController: UIViewController {
                         displayScreen.text = "Error"
                     }
                 }else {
-                    if firstNumber < 1 {
-                        displayScreen.text = "Error"
+                    if NoDecimalYet == true {
+                        if firstNumber < 0 {
+                            displayScreen.text = "Error"
+                        }else {
+                            result = factorial(firstNumber)
+                            resultFormatting()
+                        }
                     }else {
-                        result = factorial(firstNumber)
-                        resultFormatting()
-                    }
+                            result = tgamma(firstNumber+1)
+                            resultFormatting()
+                        }
                 }
-            }else{
-                displayScreen.text = "Error"
-            }
         }else{
             displayScreen.text = "0"
         }
@@ -419,11 +420,10 @@ class ViewController: UIViewController {
     }
     
     func factorial(n: Double) -> Double {
-        if n >= 0 {
-            return n == 0 ? 1 : n * self.factorial(n - 1)
-        } else {
-            userTyping = false
-            return 0 / 0
+            if n == 1 {
+                return 1
+            } else {
+                return n * factorial(n - 1)
         }
     }
 }
