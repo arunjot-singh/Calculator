@@ -7,6 +7,38 @@
 //
 
 import UIKit
+extension Double {
+    var addSeparator: String {
+        let nf = NSNumberFormatter()
+        nf.groupingSeparator = ","
+        nf.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        return nf.stringFromNumber(self)!
+    }
+}
+extension Double {
+    var scientificStyle: String {
+        let nf = NSNumberFormatter()
+        nf.numberStyle = .ScientificStyle
+        nf.positiveFormat = "0.###E+00"
+        nf.negativeFormat = "0.###E-00"
+        nf.exponentSymbol = "e"
+        return nf.stringFromNumber(self)!
+    }
+}
+extension Double {
+    var decimalStyle: String {
+        let nf = NSNumberFormatter()
+        nf.numberStyle = .DecimalStyle
+        return nf.stringFromNumber(self)!
+    }
+}
+
+extension Double {
+    func roundToPlaces(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return round(self * divisor) / divisor
+    }
+}
 
 class ViewController: UIViewController {
 
@@ -38,6 +70,7 @@ class ViewController: UIViewController {
     var result = Double()
     var operation = ""
     var digitsTapped = 0
+   
     
     override func viewDidLoad() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: "respond:")
@@ -78,87 +111,27 @@ class ViewController: UIViewController {
                 Subtract.setTitle("−", forState: .Normal)
             default:
                 if backspace == true {
-                    if displayScreen.text?.rangeOfString(".") != nil {
-                        NoDecimalYet = false
+                    var string = displayScreen.text
+                    string = string?.stringByReplacingOccurrencesOfString(",", withString: "")
+                    let length = string?.characters.count
+                    if length == 1 {
+                        displayScreen.text = "0"
                     }else{
-                        NoDecimalYet = true
+                        let truncated = String(string!.characters.dropLast())
+                        result = Double(truncated)!
+                        displayScreen.text = "\(result.addSeparator)"
                     }
-                    var truncated = String(displayScreen.text!.characters.dropLast())
-                    let length = truncated.characters.count
-                    let char = "," as Character
-                    
-                    if NoDecimalYet == true {
-                        if length == 0 {
-                            truncated = "0"
-                        }else if length == 4 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
-                        }else if length == 5 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
-                        }else if length == 6 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-                        }else if length == 8 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(1))
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(4))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(3))
-                        }else if length == 9 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(2))
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(1))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
-                        }else if length == 9 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(5))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(5))
-                        }else if length == 10 {
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(3))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(2))
-                            truncated.insert(char, atIndex: truncated.startIndex.advancedBy(6))
-                            truncated.removeAtIndex(truncated.startIndex.advancedBy(8))
-                        }
-                    }
-                    displayScreen.text = truncated
-                    if truncated == "0" {
-                        userTyping = false
-                    }else{
-                        userTyping = true
-                    }
+                }
+                if displayScreen.text == "0" {
+                    userTyping = false
+                }else{
+                    userTyping = true
                 }
             }
         }
     }
     
-    func formatLabel(var string: String) -> String {
-        let length = string.characters.count
-            if length == 4 {
-                string.insert(",", atIndex: (string.startIndex.advancedBy(1)))
-            } else if length == 6 {
-                string.removeAtIndex(string.startIndex.advancedBy(1))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(2)))
-            } else if length == 7 {
-                string.removeAtIndex(string.startIndex.advancedBy(2))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(3)))
-            } else if length == 8 {
-                string.removeAtIndex(string.startIndex.advancedBy(3))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(1)))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(5)))
-            } else if length == 10 {
-                string.removeAtIndex(string.startIndex.advancedBy(1))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(2)))
-                string.removeAtIndex(string.startIndex.advancedBy(5))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(6)))
-            } else if length == 11 {
-                string.removeAtIndex(string.startIndex.advancedBy(2))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(3)))
-                string.removeAtIndex(string.startIndex.advancedBy(6))
-                string.insert(",", atIndex: (string.startIndex.advancedBy(7)))
-            }
-            return string
-    }
-    
-    func Numberfirst() {
+       func Numberfirst() {
         let number = displayScreen.text!
         let number1 = number.stringByReplacingOccurrencesOfString(",", withString: "")
         firstNumber = Double(number1)!
@@ -172,63 +145,62 @@ class ViewController: UIViewController {
     
     func resultFormatting() {
         displayScreen.text = "\(result)"
+        if displayScreen.text == "inf" {
+            displayScreen.text = "Error"
+        }else{
         let substr = displayScreen.text?.substringFromIndex(displayScreen.text!.endIndex.advancedBy(-2))
         if substr == ".0" {
-            var finalString = displayScreen.text?.substringToIndex(displayScreen.text!.endIndex.advancedBy(-2))
+            let finalString = displayScreen.text?.substringToIndex(displayScreen.text!.endIndex.advancedBy(-2))
             let length = finalString!.characters.count
             if length > 9 {
-                var part1 = finalString?.substringToIndex(finalString!.startIndex.advancedBy(3))
-                part1?.insert(".", atIndex: (part1!.startIndex.advancedBy(1)))
-                var part2 = finalString?.substringFromIndex(finalString!.startIndex.advancedBy(3))
-                part2 = "e" + String(Int((part2?.characters.count)!))
-                finalString = part1! + part2!
-            }else {
-                finalString = formatResult(finalString!)
+                result = Double(finalString!)!
+                displayScreen.text = "\(result.scientificStyle)"
+           }else {
+                result = Double(finalString!)!
+                displayScreen.text = "\(result.addSeparator)"
             }
-            displayScreen.text = finalString
         } else {
-            var string = displayScreen.text
-            let intIndex: Int = string!.startIndex.distanceTo(string!.rangeOfString(".")!.startIndex)
-            var part1 = string?.substringToIndex(string!.startIndex.advancedBy(intIndex))
-            var part2 = string?.substringFromIndex(string!.startIndex.advancedBy(intIndex+1))
-            string = string?.stringByReplacingOccurrencesOfString(".", withString: "")
-            if string?.characters.count > 9 {
-                if part1?.characters.count > 8 {
-                    part1 = string?.substringToIndex(string!.startIndex.advancedBy(3))
-                    part1?.insert(".", atIndex: (part1!.startIndex.advancedBy(1)))
-                    part2 = string?.substringFromIndex(string!.startIndex.advancedBy(3))
-                    part2 = "e"+String(Int((part2?.characters.count)!))
-                    string = part1! + part2!
-                } else {
-                    part2 = part2?.substringToIndex(part2!.startIndex.advancedBy(9-(part1?.characters.count)!))
-                    string = formatResult(part1!) + "." + part2!
+            let string = displayScreen.text
+            let str = displayScreen.text?.substringToIndex(displayScreen.text!.startIndex.advancedBy(2))
+            if str == "0." {
+                result = Double(string!)!
+                displayScreen.text = "\(result.roundToPlaces(8))"
+            }else{
+                if string!.rangeOfString("e") == nil {
+                    let str = string?.stringByReplacingOccurrencesOfString(".", withString: "")
+                    let length = str?.characters.count
+                    if length > 9 {
+                        let intIndex: Int = string!.startIndex.distanceTo(string!.rangeOfString(".")!.startIndex)
+                        let part1 = string?.substringToIndex(string!.startIndex.advancedBy(intIndex))
+                        var part2 = string?.substringFromIndex(string!.startIndex.advancedBy(intIndex+1))
+                        if part1?.characters.count < 7 {
+                            part2 = part2?.substringToIndex((part2?.startIndex.advancedBy(9-(part1?.characters.count)!))!)
+                            result = Double(part1!)!
+                            displayScreen.text = "\(result.addSeparator)." + part2!
+                        }else{
+                            result = Double(str!)!
+                            displayScreen.text = "\(result.scientificStyle)"
+                        }
+                    }else{
+                        let intIndex: Int = string!.startIndex.distanceTo(string!.rangeOfString(".")!.startIndex)
+                        let part1 = string?.substringToIndex(string!.startIndex.advancedBy(intIndex))
+                        let part2 = string?.substringFromIndex(string!.startIndex.advancedBy(intIndex+1))
+                        result = Double(part1!)!
+                        displayScreen.text = "\(result.addSeparator)." + part2!
+                    }
+                }else{
+                    if string?.characters.count > 9 {
+                        let intIndex: Int = string!.startIndex.distanceTo((string!.rangeOfString("e")!.startIndex))
+                        let part1 = string?.substringToIndex(string!.startIndex.advancedBy(5))
+                        let part2 = string?.substringFromIndex(string!.startIndex.advancedBy(intIndex))
+                        displayScreen.text = part1! + part2!
+                    }else{
+                        displayScreen.text = string
+                    }
                 }
-            } else {
-                string = formatResult(part1!) + "." + part2!
             }
-            displayScreen.text = string
+            }
         }
-    }
-    
-    func formatResult(var string: String) -> String {
-        let length = string.characters.count
-        if length == 4 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(1)))
-        } else if length == 5 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(2)))
-        } else if length == 6 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(3)))
-        } else if length == 7 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(1)))
-            string.insert(",", atIndex: (string.startIndex.advancedBy(5)))
-        } else if length == 8 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(2)))
-            string.insert(",", atIndex: (string.startIndex.advancedBy(6)))
-        } else if length == 9 {
-            string.insert(",", atIndex: (string.startIndex.advancedBy(3)))
-            string.insert(",", atIndex: (string.startIndex.advancedBy(7)))
-        }
-        return string
     }
     
     @IBAction func digitTapped(sender: UIButton) {
@@ -236,7 +208,10 @@ class ViewController: UIViewController {
         let digit = sender.currentTitle
         if userTyping == true {
             if NoDecimalYet == true {
-                displayScreen.text = formatLabel(displayScreen.text! + digit!)
+                var str = displayScreen.text! + digit!
+                str = str.stringByReplacingOccurrencesOfString(",", withString: "")
+                result = Double(str)!
+                displayScreen.text = "\(result.addSeparator)"
             } else {
                 displayScreen.text = displayScreen.text! + digit!
                 }
@@ -289,7 +264,7 @@ class ViewController: UIViewController {
         }else if operation == "ln" {
             if firstNumber > 0 {
                 result = log(firstNumber)
-                resultFormatting()
+                displayScreen.text = "\(result.roundToPlaces(8))"
             }else{
                 displayScreen.text = "Error"
             }
@@ -315,16 +290,16 @@ class ViewController: UIViewController {
             }
         }else if operation == "Rand" {
             result = drand48()
-            resultFormatting()
+            displayScreen.text = "\(result.roundToPlaces(8))"
         }else if operation == "Sin" {
             result = sin((firstNumber*3.14159)/180)
-            resultFormatting()
+            displayScreen.text = "\(result.roundToPlaces(8))"
         }else if operation == "Cos" {
             result = cos((firstNumber*3.14159)/180)
-            resultFormatting()
+            displayScreen.text = "\(result.roundToPlaces(8))"
         }else if operation == "Tan" {
             result = tan((firstNumber*3.14159)/180)
-            resultFormatting()
+            displayScreen.text = "\(result.roundToPlaces(8))"
         }
         }
         userTyping = false
@@ -341,7 +316,7 @@ class ViewController: UIViewController {
                 if operation == "log" {
                     if firstNumber > 0 {
                         result = log10(firstNumber)
-                        resultFormatting()
+                        displayScreen.text = "\(result.roundToPlaces(8))"
                     }else{
                         displayScreen.text = "Error"
                     }
@@ -354,9 +329,16 @@ class ViewController: UIViewController {
                             resultFormatting()
                         }
                     }else {
-                            result = tgamma(firstNumber+1)
-                            resultFormatting()
+                        result = tgamma(firstNumber+1)
+                        var string = "\(result.roundToPlaces(8))"
+                        if string.characters.count > 9 {
+                            string = string.stringByReplacingOccurrencesOfString(".", withString: "")
+                            result = Double(string)!
+                            displayScreen.text = "\(result.scientificStyle)"
+                        }else{
+                            displayScreen.text = string
                         }
+                    }
                 }
         }else{
             displayScreen.text = "0"
@@ -379,6 +361,9 @@ class ViewController: UIViewController {
             Numbersecond()
             if operation == "+" {
                 result = firstNumber + secondNumber
+                var string = "\(result)"
+                string = string.stringByReplacingOccurrencesOfString(".", withString: "")
+                result = Double(string)!
                 resultFormatting()
             }else if operation == "−" {
                 result = firstNumber - secondNumber
@@ -420,12 +405,13 @@ class ViewController: UIViewController {
     }
     
     func factorial(n: Double) -> Double {
-            if n == 1 {
-                return 1
-            } else {
-                return n * factorial(n - 1)
+        if n >= 0 {
+            return n == 0 ? 1 : n * self.factorial(n - 1)
+        } else {
+            return 0 / 0
         }
     }
+    
 }
 
 
