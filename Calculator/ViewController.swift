@@ -73,13 +73,13 @@ class ViewController: UIViewController {
    
     
     override func viewDidLoad() {
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: "respond:")
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.respond(_:)))
         swipeUp.direction = .Up
         view.addGestureRecognizer(swipeUp)
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: "respond:")
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.respond(_:)))
         swipeDown.direction = .Down
         view.addGestureRecognizer(swipeDown)
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: "respond:")
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.respond(_:)))
         swipeRight.direction = .Right
         view.addGestureRecognizer(swipeRight)
     }
